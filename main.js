@@ -12,9 +12,9 @@ items.forEach(item => observer.observe(item))
 
 
 const darkBtn = document.getElementById('darkModeBtn')
-const prefersDark = localStorage.getItem('theme')
+const savedTheme = localStorage.getItem('theme')
 
-if (prefersDark === 'dark') {
+if (savedTheme === 'dark') {
   document.body.classList.add('dark')
 }
 
@@ -22,9 +22,30 @@ darkBtn.addEventListener('click', e => {
   e.preventDefault()
   document.body.classList.toggle('dark')
 
-  if (document.body.classList.contains('dark')) {
-    localStorage.setItem('theme', 'dark')
-  } else {
-    localStorage.setItem('theme', 'light')
-  }
+  localStorage.setItem(
+    'theme',
+    document.body.classList.contains('dark') ? 'dark' : 'light'
+  )
+})
+
+
+const langBtn = document.getElementById('langToggle')
+let currentLang = localStorage.getItem('lang') || 'es'
+
+function setLanguage(lang) {
+  document.querySelectorAll('[data-es]').forEach(el => {
+    el.textContent = el.dataset[lang]
+  })
+
+  langBtn.textContent = lang === 'es' ? 'EN' : 'ES'
+  document.documentElement.lang = lang
+  localStorage.setItem('lang', lang)
+}
+
+setLanguage(currentLang)
+
+langBtn.addEventListener('click', e => {
+  e.preventDefault()
+  currentLang = currentLang === 'es' ? 'en' : 'es'
+  setLanguage(currentLang)
 })
