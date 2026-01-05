@@ -4,10 +4,30 @@
   box-sizing: border-box;
 }
 
-
 :root {
-  --bg: #f7f7f7;
-  --bg-soft: rgba(255,255,255,.6);
+  --bg:
+    radial-gradient(
+      900px 500px at 15% 0%,
+      rgba(120, 160, 255, 0.18),
+      transparent 50%
+    ),
+    radial-gradient(
+      800px 500px at 85% 10%,
+      rgba(180, 200, 255, 0.16),
+      transparent 55%
+    ),
+    radial-gradient(
+      700px 400px at 50% 100%,
+      rgba(200, 180, 255, 0.12),
+      transparent 60%
+    ),
+    linear-gradient(
+      180deg,
+      #f7f9ff 0%,
+      #eef1f7 100%
+    );
+
+  --bg-soft: rgba(255,255,255,.7);
   --text: #0b1220;
   --text-soft: rgba(0,0,0,.6);
   --border: rgba(0,0,0,.08);
@@ -16,21 +36,26 @@
 
 body.dark {
   --bg: #0b0d12;
-  --bg-soft: rgba(20,20,30,.6);
+  --bg-soft: rgba(20,20,30,.65);
   --text: #f2f2f2;
   --text-soft: rgba(255,255,255,.55);
   --border: rgba(255,255,255,.12);
   --accent: #ffffff;
 }
 
+
+html {
+  min-height: 100%;
+}
+
 body {
   font-family: "Inter", sans-serif;
   background: var(--bg);
+  background-attachment: fixed;
   color: var(--text);
   padding-bottom: 120px;
   transition: background .4s ease, color .4s ease;
 }
-
 
 .topbar {
   position: fixed;
@@ -138,8 +163,6 @@ main {
   transition: all .25s ease;
 }
 
-
-
 .tech i {
   font-size: 1rem;
   opacity: .6;
@@ -151,8 +174,6 @@ main {
     inset 0 0 0 1px rgba(0,0,0,.18),
     0 6px 16px rgba(0,0,0,.08);
 }
-
-
 
 .gallery {
   padding: 80px 0 40px;
@@ -178,6 +199,7 @@ main {
     grid-template-columns: 1fr;
   }
 }
+
 
 .card {
   background: none;
@@ -209,6 +231,12 @@ main {
   margin-bottom: .8rem;
 }
 
+
+.links {
+  display: flex;
+  gap: .6rem;
+}
+
 .btn {
   font-size: .7rem;
   letter-spacing: .12em;
@@ -217,20 +245,46 @@ main {
   border-radius: 999px;
   text-decoration: none;
   transition: .25s;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn.primary {
   background: var(--accent);
-  color: var(--bg);
+  color: #fff;
 }
 
 .btn.secondary {
-  color: var(--text-soft);
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
 }
 
 .btn:hover {
   opacity: .85;
 }
+
+.btn.secondary:hover {
+  background: var(--bg-soft);
+}
+
+body.dark .btn.primary {
+  background: #fff;
+  color: #0b0d12;
+}
+
+body.dark .btn.secondary {
+  border-color: rgba(255,255,255,.25);
+  color: var(--text);
+}
+
+body.dark .btn.secondary:hover {
+  background: rgba(255,255,255,.08);
+}
+
 
 .dock {
   position: fixed;
